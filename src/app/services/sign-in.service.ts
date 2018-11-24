@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { server, apiInitials} from './../consts/configuration';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SignInService {
-  server = 'willbeaddedsoon';
 
   constructor(private http: HttpClient) {
 
@@ -17,6 +17,6 @@ export class SignInService {
         'Content-Type':  'application/json',
       })
     };
-    return this.http.post<any>(`${this.server}login`, loginInfo, httpOptions);
+    return this.http.post<any>(`${server}${apiInitials}login`, loginInfo, httpOptions);
   }
 }

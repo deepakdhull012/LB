@@ -40,15 +40,17 @@ export class SignInPage implements OnInit, AfterViewInit {
     this.passwordMode = this.password.nativeElement.attributes.type.nodeValue;
   }
   login() {
-    const loginFormValue = this.loginForm.value;
-    const loginInfo = JSON.stringify({ email: loginFormValue.email, password: loginFormValue.password });
-    this.signInService.loginUser(loginInfo).subscribe((loginResponse) => {
-      if (loginResponse) {
-        localStorage.setItem('loggedInUserId', loginResponse._id);
-        localStorage.setItem('keepMeLogin', loginFormValue.keepMeLogin);
-        this.router.navigate(['../landing']);
-      }
-    });
+    console.log('called');
+    this.router.navigate(['../landing']);
+    // const loginFormValue = this.loginForm.value;
+    // const loginInfo = JSON.stringify({ email: loginFormValue.email, password: loginFormValue.password });
+    // this.signInService.loginUser(loginInfo).subscribe((loginResponse) => {
+    //   if (loginResponse) {
+    //     localStorage.setItem('loggedInUserId', loginResponse._id);
+    //     localStorage.setItem('keepMeLogin', loginFormValue.keepMeLogin);
+    //     this.router.navigate(['../landing']);
+    //   }
+    // });
 
   }
   switchPasswordMode() {

@@ -27,8 +27,15 @@
     "@ionic-native/status-bar": "5.0.0-beta.21",
     "@ionic/angular": "4.0.0-beta.16",
     "@ionic/pro": "2.0.3",
-    "cordova-plugin-facebook4": "3.1.0",
-    "cordova-plugin-googleplus": "5.3.2",
+    "cordova-android": "7.1.2",
+    "cordova-plugin-device": "^2.0.2",
+    "cordova-plugin-facebook4": "^3.1.0",
+    "cordova-plugin-googleplus": "^5.3.2",
+    "cordova-plugin-ionic-keyboard": "^2.1.3",
+    "cordova-plugin-ionic-webview": "^2.2.3",
+    "cordova-plugin-splashscreen": "^5.0.2",
+    "cordova-plugin-statusbar": "^2.4.2",
+    "cordova-plugin-whitelist": "^1.3.3",
     "core-js": "^2.5.4",
     "rxjs": "~6.3.3",
     "zone.js": "~0.8.26"
@@ -64,11 +71,24 @@
     "plugins": {
       "cordova-plugin-facebook4": {
         "APP_ID": "262571107787135",
-        "APP_NAME": "LegalBites"
+        "APP_NAME": "LegalBites",
+        "FACEBOOK_ANDROID_SDK_VERSION": "4.37.0"
       },
       "cordova-plugin-googleplus": {
-        "REVERSED_CLIENT_ID": "440503878558-oshtp40fr6rtg9q4mka9b1uue7no3mda.apps.googleusercontent.com"
-      }
-    }
+        "REVERSED_CLIENT_ID": "440503878558-oshtp40fr6rtg9q4mka9b1uue7no3mda.apps.googleusercontent.com",
+        "PLAY_SERVICES_VERSION": "11.8.0"
+      },
+      "cordova-plugin-whitelist": {},
+      "cordova-plugin-statusbar": {},
+      "cordova-plugin-device": {},
+      "cordova-plugin-splashscreen": {},
+      "cordova-plugin-ionic-webview": {
+        "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
+      },
+      "cordova-plugin-ionic-keyboard": {}
+    },
+    "platforms": [
+      "android"
+    ]
   }
 }

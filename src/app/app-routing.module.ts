@@ -10,14 +10,12 @@ const routes: Routes = [
   },
   {
     path: 'landing',
-    loadChildren: './pages/landing/landing.module#LandingPageModule',
-    canActivate: [AuthGuard]
+    loadChildren: './pages/landing/landing.module#LandingPageModule'
   },
   {
     path: 'verify',
     loadChildren: './pages/sign-in/sign-in.module#SignInPageModule'
-  },
-  { path: 'landing', loadChildren: './pages/landing/landing.module#LandingPageModule' }
+  }
 ];
 
 @NgModule({

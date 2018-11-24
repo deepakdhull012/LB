@@ -1,6 +1,8 @@
 {
   "name": "LegalBites",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular",
   "pro_id": "ecd51ae0"
 }

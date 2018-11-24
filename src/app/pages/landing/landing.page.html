@@ -1,11 +1,28 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-        <ion-menu-button></ion-menu-button>
+      <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Landing</ion-title>
+    <ion-searchbar></ion-searchbar>
   </ion-toolbar>
 </ion-header>
-<ion-content padding>
+<ion-content no-padding>
 
+  <ion-card *ngFor="let post of posts">
+    <p class="author">Post By : <a class="userUrl" (click)="getUserProfile(post._embedded.author[0].id)">{{post._embedded.author[0].name}}</a></p>
+    <ion-img src="{{post.featured_image_urls.medium_large}}"></ion-img>
+    <ion-card-header>
+      <ion-card-title>{{post.title.rendered}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p [innerHTML]="post.excerpt.rendered"></p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+      <ion-infinite-scroll-content
+        loadingSpinner="bubbles"
+        loadingText="Loading more news...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 </ion-content>
