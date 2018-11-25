@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { LandingService } from './../../services/landing.service';
-import { imagesUrl } from './../../consts/configuration';
 
 @Component({
   selector: 'app-landing',
@@ -10,13 +9,15 @@ import { imagesUrl } from './../../consts/configuration';
 export class LandingPage implements OnInit {
   posts:any = [];
   page: number = 1;
-  pageSize: number = 2;
+  pageSize: number = 20;
+  searchText: string = '';
+  
   constructor(
     private landingService: LandingService
   ) { }
 
   ngOnInit() {
-    this.landingService.fetchPosts(this.pageSize,this.page).subscribe((posts)=> {
+    this.landingService.fetchPosts(this.pageSize,this.page,this.searchText).subscribe((posts)=> {
       this.posts = [...this.posts,...posts];
       console.log('Initial',this.posts)
     });
@@ -24,10 +25,24 @@ export class LandingPage implements OnInit {
 
   loadMore(event) {  
     this.page++;
-    this.landingService.fetchPosts(this.pageSize,this.page).subscribe((posts)=> {
+    this.landingService.fetchPosts(this.pageSize,this.page,this.searchText).subscribe((posts)=> {
       this.posts = [...this.posts,...posts];
       event.target.complete();
     });
+  }
+
+  search($event) {
+    this.page = 1;
+    this.searchText = $event.detail.value;
+    this.landingService.fetchPosts(this.pageSize,this.page,this.searchText).subscribe((posts)=> {
+      this.posts = [];
+      this.posts = [...this.posts,...posts];
+    });
+  }
+
+  searchClear() {
+    this.page = 1;
+    this.searchText = '';
   }
 
   getUserProfile(userId) {

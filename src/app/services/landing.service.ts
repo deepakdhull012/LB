@@ -12,13 +12,22 @@ export class LandingService {
 
   }
 
-  fetchPosts(noOfPosts,pageNo) {
+  fetchPosts(noOfPosts,pageNo,searchText) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
       })
     };
-    return this.http.get<any>(`${server}${apiInitials}posts?per_page=${noOfPosts}&_embed&page=${pageNo}`, httpOptions);
+    return this.http.get<any>(`${server}${apiInitials}posts?per_page=${noOfPosts}&search=${searchText}&_embed&page=${pageNo}`, httpOptions);
+  }
+
+  searchPosts(searchText) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+      })
+    };
+    return this.http.get<any>(`${server}${apiInitials}posts?search=${searchText}`, httpOptions);
   }
 
   getUserProfile(userId) {

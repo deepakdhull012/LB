@@ -3,14 +3,14 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-searchbar></ion-searchbar>
+    <ion-searchbar debounce="500" (ionChange)="search($event)" (ionCancel)="searchCancel()" (ionClear)="searchClear()"></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 <ion-content no-padding>
 
   <ion-card *ngFor="let post of posts">
     <p class="author">Post By : <a class="userUrl" (click)="getUserProfile(post._embedded.author[0].id)">{{post._embedded.author[0].name}}</a></p>
-    <ion-img src="{{post.featured_image_urls.medium_large}}"></ion-img>
+    <ion-img src="{{post._embedded['wp:featuredmedia'][0].source_url}}"></ion-img>
     <ion-card-header>
       <ion-card-title>{{post.title.rendered}}</ion-card-title>
     </ion-card-header>
