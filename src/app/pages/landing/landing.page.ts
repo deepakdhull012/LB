@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LandingService } from './../../services/landing.service';
 import { CommonService } from 'src/app/services/common.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-landing',
@@ -8,32 +9,37 @@ import { CommonService } from 'src/app/services/common.service';
   styleUrls: ['./landing.page.scss'],
 })
 export class LandingPage implements OnInit {
-  posts:any = [];
+  posts: any = [];
   page: number = 1;
   pageSize: number = 20;
   searchText: string = '';
   loading = false;
-  
+
   constructor(
     private landingService: LandingService,
-    private commonService: CommonService
+    private commonService: CommonService,
+    private router: Router
   ) { }
 
   ngOnInit() {
-    this.commonService.showLoader();
-    this.loading = true;
-    this.landingService.fetchPosts(this.pageSize,this.page,this.searchText).subscribe((posts)=> {
-      this.posts = [...this.posts,...posts];
-      this.commonService.dismissLoader();
-      this.loading = false;
-      console.log('Initial',this.posts)
-    });
+    this.posts = this.commonService.postList;
+    if (this.posts.length === 0) {
+      this.commonService.showLoader();
+      this.loading = true;
+      this.landingService.fetchPosts(this.pageSize, this.page, this.searchText).subscribe((posts) => {
+        this.posts = [...this.posts, ...posts];
+        this.commonService.dismissLoader();
+        this.loading = false;
+        this.commonService.postList = this.posts;
+        console.log('Initial', this.posts)
+      });
+    }
   }
 
-  loadMore(event) {  
+  loadMore(event) {
     this.page++;
-    this.landingService.fetchPosts(this.pageSize,this.page,this.searchText).subscribe((posts)=> {
-      this.posts = [...this.posts,...posts];
+    this.landingService.fetchPosts(this.pageSize, this.page, this.searchText).subscribe((posts) => {
+      this.posts = [...this.posts, ...posts];
       event.target.complete();
     });
   }
@@ -41,9 +47,9 @@ export class LandingPage implements OnInit {
   search($event) {
     this.page = 1;
     this.searchText = $event.detail.value;
-    this.landingService.fetchPosts(this.pageSize,this.page,this.searchText).subscribe((posts)=> {
+    this.landingService.fetchPosts(this.pageSize, this.page, this.searchText).subscribe((posts) => {
       this.posts = [];
-      this.posts = [...this.posts,...posts];
+      this.posts = [...this.posts, ...posts];
     });
   }
 
@@ -53,9 +59,14 @@ export class LandingPage implements OnInit {
   }
 
   getUserProfile(userId) {
-    this.landingService.getUserProfile(userId).subscribe((userData)=>{
+    this.landingService.getUserProfile(userId).subscribe((userData) => {
       console.log(userData);
-    })
+    });
+  }
+
+  goToPostDetail(post) {
+    this.router.navigate(['landing', 'postDetail']);
+    this.commonService.data = post;
   }
 
 }

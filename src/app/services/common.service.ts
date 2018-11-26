@@ -6,6 +6,8 @@ import { LoadingController } from '@ionic/angular';
 })
 export class CommonService {
   loader:any;
+  data:any = null;
+  postList = [];
 
   constructor(
     public loadingController: LoadingController
