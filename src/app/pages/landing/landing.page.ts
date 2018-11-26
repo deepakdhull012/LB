@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LandingService } from './../../services/landing.service';
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-landing',
@@ -11,14 +12,20 @@ export class LandingPage implements OnInit {
   page: number = 1;
   pageSize: number = 20;
   searchText: string = '';
+  loading = false;
   
   constructor(
-    private landingService: LandingService
+    private landingService: LandingService,
+    private commonService: CommonService
   ) { }
 
   ngOnInit() {
+    this.commonService.showLoader();
+    this.loading = true;
     this.landingService.fetchPosts(this.pageSize,this.page,this.searchText).subscribe((posts)=> {
       this.posts = [...this.posts,...posts];
+      this.commonService.dismissLoader();
+      this.loading = false;
       console.log('Initial',this.posts)
     });
   }
