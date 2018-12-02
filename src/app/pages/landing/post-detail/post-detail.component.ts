@@ -15,6 +15,7 @@ export class PostDetailComponent implements OnInit {
 
   ngOnInit() {
     this.post = this.commonService.data;
+    
   }
 
 }

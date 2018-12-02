@@ -16,6 +16,14 @@
                 </ion-label>
               </ion-item>
             </ion-menu-toggle>
+            <ion-menu-toggle auto-hide="false">
+                <ion-item [routerDirection]="'root'" [routerLink]="['landing','offlinePosts']">
+                  <ion-icon slot="start" name="ios-log-out"></ion-icon>
+                  <ion-label>
+                    OffLine Posts
+                  </ion-label>
+                </ion-item>
+              </ion-menu-toggle>
             <ion-menu-toggle auto-hide="false" (click)="logout()">
               <ion-item [routerDirection]="'root'" [routerLink]="verify">
                 <ion-icon slot="start" name="ios-log-out"></ion-icon>

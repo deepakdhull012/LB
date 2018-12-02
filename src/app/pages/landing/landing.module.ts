@@ -11,6 +11,8 @@ import { PostDetailComponent } from './post-detail/post-detail.component';
 import { ContainerComponent } from './container/container.component';
 
 import { landingRoutes } from './landing.routes';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
+import { OfflinePostsComponent } from './offline-posts/offline-posts.component';
 
 @NgModule({
   imports: [
@@ -20,6 +22,14 @@ import { landingRoutes } from './landing.routes';
     RouterModule.forChild(landingRoutes),
     CoreModule
   ],
-  declarations: [LandingPage, PostDetailComponent, ContainerComponent]
+  declarations: [
+    LandingPage, 
+    PostDetailComponent,
+    ContainerComponent,
+    OfflinePostsComponent
+  ],
+  providers: [
+    NativeStorage
+  ]
 })
 export class LandingPageModule {}
