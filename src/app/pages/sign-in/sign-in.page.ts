@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ValidationConfig } from './../../formConfigs/validationConfig';
 import { SignInService } from '../../services/sign-in.service';
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -21,13 +22,15 @@ export class SignInPage implements OnInit, AfterViewInit {
   passwordMode = 'password';
   colorRed = '#f00';
   @ViewChild('password', { read: ElementRef }) password: ElementRef;
+  loading = false;
 
   constructor(
     private formBuilder: FormBuilder,
     private signInService: SignInService,
     private router: Router,
     private facbook: Facebook,
-    private googlePlus: GooglePlus
+    private googlePlus: GooglePlus,
+    private commonService: CommonService
   ) {
     this.validationConfig = ValidationConfig.getLoginConfig();
     this.loginForm = this.formBuilder.group(this.validationConfig);
@@ -40,17 +43,20 @@ export class SignInPage implements OnInit, AfterViewInit {
     this.passwordMode = this.password.nativeElement.attributes.type.nodeValue;
   }
   login() {
-    console.log('called');
-    this.router.navigate(['../landing']);
-    // const loginFormValue = this.loginForm.value;
-    // const loginInfo = JSON.stringify({ email: loginFormValue.email, password: loginFormValue.password });
-    // this.signInService.loginUser(loginInfo).subscribe((loginResponse) => {
-    //   if (loginResponse) {
-    //     localStorage.setItem('loggedInUserId', loginResponse._id);
-    //     localStorage.setItem('keepMeLogin', loginFormValue.keepMeLogin);
-    //     this.router.navigate(['../landing']);
-    //   }
-    // });
+    this.commonService.showLoader();
+      this.loading = true;
+    //this.router.navigate(['../landing']);
+    const loginFormValue = this.loginForm.value;
+    const loginInfo = JSON.stringify({ username: loginFormValue.username, password: loginFormValue.password });
+    this.signInService.loginUser(loginInfo).subscribe((loginResponse) => {
+      if (loginResponse) {
+        this.commonService.dismissLoader();
+          this.loading = false;
+        localStorage.setItem('loggedInUserId',loginResponse.token)
+        localStorage.setItem('keepMeLogin', loginFormValue.keepMeLogin);
+        this.router.navigate(['../landing']);
+      }
+    });
 
   }
   switchPasswordMode() {

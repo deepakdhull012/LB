@@ -3,14 +3,14 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-searchbar debounce="1000" (ionChange)="search($event)" (ionCancel)="searchCancel()" (ionClear)="searchClear()"></ion-searchbar>
+    <ion-searchbar debounce="1000" (ionChange)="search($event)" (ionClear)="searchClear()"></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 <ion-content no-padding>
   <h4 text-center *ngIf="searchText.length>0">Searching For <b>{{searchText}}</b></h4>
   <p text-center *ngIf="posts.length == 0 && !loading">No Posts to Show</p>
   <ion-card *ngFor="let post of posts">
-    <ion-img src="{{post._embedded['wp:featuredmedia'][0].source_url}}"></ion-img>
+    <ion-img [src]="post['featured_image_urls']['goodlife-widget-photo']"></ion-img>
     <ion-card-header>
       <ion-card-title (click)="goToPostDetail(post)">
         {{post.title.rendered}}

@@ -5,11 +5,11 @@
             <ion-label floating>
                 <ion-icon name="person" class="input-icon"></ion-icon>
             </ion-label>
-            <ion-input text-lowercase type="email" formControlName="email" placeholder="Email"></ion-input>
-            <ion-label floating *ngIf="loginForm.get('email').valid && loginForm.get('email').dirty">
+            <ion-input text-lowercase type="email" formControlName="username" placeholder="Email"></ion-input>
+            <ion-label floating *ngIf="loginForm.get('username').valid && loginForm.get('username').dirty">
                 <ion-icon name="ios-checkmark" class="correct-icon"></ion-icon>
             </ion-label>
-            <ion-label floating *ngIf="loginForm.get('email').invalid && loginForm.get('email').value != null">
+            <ion-label floating *ngIf="loginForm.get('username').invalid && loginForm.get('username').value != null">
                 <ion-icon name="ios-close" class="wrong-icon"></ion-icon>
             </ion-label>
         </ion-item>
@@ -17,7 +17,7 @@
             <ion-label>
                 <ion-icon name="lock" class="input-icon"></ion-icon>
             </ion-label>
-            <ion-input  #password text-lowercase type="password" formControlName="password" placeholder="Password"></ion-input>
+            <ion-input  #password type="password" formControlName="password" placeholder="Password"></ion-input>
             <ion-label floating (click)="switchPasswordMode()">
                 <ion-icon *ngIf="passwordMode === 'password'" name="ios-eye-off" class="input-icon" ></ion-icon>
                 <ion-icon *ngIf="passwordMode === 'text'" name="ios-eye" class="input-icon"></ion-icon>            

@@ -12,7 +12,8 @@ import { NativeStorage } from '@ionic-native/native-storage/ngx';
 export class LandingPage implements OnInit {
   posts: any = [];
   page: number = 1;
-  pageSize: number = 20;
+  initialPageSize: number = 5;
+  pageSize: number = 10;
   searchText: string = '';
   loading = false;
 
@@ -28,13 +29,15 @@ export class LandingPage implements OnInit {
     if (this.posts.length === 0) {
       this.commonService.showLoader();
       this.loading = true;
-      this.landingService.fetchPosts(this.pageSize, this.page, this.searchText).subscribe((posts) => {
-        this.posts = [...this.posts, ...posts];
-        this.commonService.dismissLoader();
-        this.loading = false;
-        this.commonService.postList = this.posts;
-        console.log('Initial', this.posts)
-      });
+      setTimeout(()=>{
+        this.landingService.fetchPosts(this.pageSize, this.page, '').subscribe((posts) => {
+          this.posts = [...this.posts, ...posts];
+          this.commonService.dismissLoader();
+          this.loading = false;
+          this.commonService.postList = this.posts;
+        });
+      },0);
+      
     }
   }
 

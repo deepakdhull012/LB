@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { server, apiInitials} from './../consts/configuration';
+import { server, apiInitials, loginUrl} from './../consts/configuration';
 
 @Injectable({
   providedIn: 'root'
@@ -14,9 +14,11 @@ export class SignInService {
   loginUser(loginInfo) {
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type':  'application/json',
+
+        'content-type':"application/json"
       })
     };
-    return this.http.post<any>(`${server}${apiInitials}login`, loginInfo, httpOptions);
+    console.log(loginInfo)
+    return this.http.post<any>(`${server}${loginUrl}`, loginInfo, httpOptions);
   }
 }
