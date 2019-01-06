@@ -1,40 +1,83 @@
 <ion-app>
-    <ion-split-pane>
-      <ion-menu>
-        <ion-header>
-          <ion-toolbar>
-            <ion-title>Menu</ion-title>
-          </ion-toolbar>
-        </ion-header>
-        <ion-content>
-          <ion-list>
-            <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
-              <ion-item [routerDirection]="'root'" [routerLink]="[p.url]">
-                <ion-icon slot="start" [name]="p.icon"></ion-icon>
-                <ion-label>
-                  {{p.title}}
-                </ion-label>
+  <ion-split-pane>
+    <ion-menu>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Menu</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <ion-list>
+          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
+            <ion-item [routerDirection]="'root'" [routerLink]="[p.url]">
+              <ion-icon slot="start" [name]="p.icon"></ion-icon>
+              <ion-label>
+                {{p.title}}
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+          <div *ngFor="let cat of categories">
+            <ion-menu-toggle *ngIf="cat.subMenus.length == 0">
+              <ion-item>
+                  <span [routerDirection]="'root'" [routerLink]="[cat.name]">{{cat.name}}</span>
               </ion-item>
+              
             </ion-menu-toggle>
-            <ion-menu-toggle auto-hide="false">
-                <ion-item [routerDirection]="'root'" [routerLink]="['landing','offlinePosts']">
-                  <ion-icon slot="start" name="ios-log-out"></ion-icon>
+            <ion-item *ngIf="cat.subMenus.length > 0">
+              <span>{{cat.name}}</span>
+              <ion-icon slot="end" name="add-circle" *ngIf="cat.subMenus.length > 0 && !cat.expanded" (click)="cat.expanded = true"></ion-icon>
+              <ion-icon slot="end" name="arrow-dropup-circle" *ngIf="cat.subMenus.length > 0 && cat.expanded" (click)="cat.expanded = false"></ion-icon>
+            </ion-item>
+            <ion-list *ngIf="cat.expanded">
+              <ion-item *ngFor="let subcat of cat.subMenus">
+                <ion-menu-toggle *ngIf="subcat.subMenus.length == 0">
+                  <ion-item>
+                    <ion-label>
+                      <span [routerDirection]="'root'" [routerLink]="[subcat.name]">{{subcat.name}}</span>
+                    </ion-label>
+                  </ion-item>
+                </ion-menu-toggle>
+                <ion-item *ngIf="subcat.subMenus.length > 0">
                   <ion-label>
-                    OffLine Posts
+                    <span>{{subcat.name}}</span>
+                    <ion-icon slot="end" name="add-circle" *ngIf="subcat.subMenus.length > 0 && !subcat.expanded"
+                      (click)="subcat.expanded = true"></ion-icon>
+                    <ion-icon slot="end" name="arrow-dropup-circle" *ngIf="subcat.subMenus.length > 0 && subcat.expanded"
+                      (click)="subcat.expanded = false"></ion-icon>
                   </ion-label>
+
                 </ion-item>
-              </ion-menu-toggle>
-            <ion-menu-toggle auto-hide="false" (click)="logout()">
-              <ion-item [routerDirection]="'root'" [routerLink]="['verify']">
-                <ion-icon slot="start" name="ios-log-out"></ion-icon>
-                <ion-label>
-                  Log Out
-                </ion-label>
               </ion-item>
-            </ion-menu-toggle>
-          </ion-list>
-        </ion-content>
-      </ion-menu>
-      <ion-router-outlet main></ion-router-outlet>
-    </ion-split-pane>
-  </ion-app>  
+            </ion-list>
+          </div>
+        <!-- <ion-menu-toggle auto-hide="false" *ngFor="let cat of categories">
+              <ion-item>
+                <ion-label>
+                  <span [routerDirection]="'root'" [routerLink]="[cat.name]">{{cat.name}}</span>
+                </ion-label>
+                <ion-icon slot="end" name="add-circle" *ngIf="cat.subMenus.length > 0 && !cat.expanded" (click)="cat.expanded = true"></ion-icon>
+                <ion-icon slot="end" name="arrow-dropup-circle" *ngIf="cat.subMenus.length > 0 && cat.expanded" (click)="cat.expanded = false"></ion-icon>
+              </ion-item>
+            </ion-menu-toggle> -->
+        <ion-menu-toggle auto-hide="false">
+          <ion-item [routerDirection]="'root'" [routerLink]="['landing','offlinePosts']">
+            <ion-icon slot="start" name="ios-log-out"></ion-icon>
+            <ion-label>
+              OffLine Posts
+            </ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle auto-hide="false" (click)="logout()">
+          <ion-item [routerDirection]="'root'" [routerLink]="['verify']">
+            <ion-icon slot="start" name="ios-log-out"></ion-icon>
+            <ion-label>
+              Log Out
+            </ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        </ion-list>
+      </ion-content>
+    </ion-menu>
+    <ion-router-outlet main></ion-router-outlet>
+  </ion-split-pane>
+</ion-app>

@@ -48,7 +48,7 @@ export class SignInPage implements OnInit, AfterViewInit {
     //this.router.navigate(['../landing']);
     const loginFormValue = this.loginForm.value;
     const loginInfo = JSON.stringify({ username: loginFormValue.username, password: loginFormValue.password });
-    this.signInService.loginUser(loginInfo).subscribe((loginResponse) => {
+    this.signInService.loginUser(loginInfo).then((loginResponse) => {
       if (loginResponse) {
         this.commonService.dismissLoader();
           this.loading = false;
@@ -56,6 +56,12 @@ export class SignInPage implements OnInit, AfterViewInit {
         localStorage.setItem('keepMeLogin', loginFormValue.keepMeLogin);
         this.router.navigate(['../landing']);
       }
+    }).catch((err)=>{
+      this.commonService.dismissLoader();
+      this.loading = false;
+      this.loginForm.get('username').setValue('');
+      this.loginForm.get('password').setValue('');
+      //alert('Authentication Failed');
     });
 
   }

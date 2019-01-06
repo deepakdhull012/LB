@@ -19,6 +19,6 @@ export class SignInService {
       })
     };
     console.log(loginInfo)
-    return this.http.post<any>(`${server}${loginUrl}`, loginInfo, httpOptions);
+    return this.http.post<any>(`${server}${loginUrl}`, loginInfo, httpOptions).toPromise();
   }
 }
