@@ -54,8 +54,7 @@ export class MenuConfig {
             { name: 'Admissions', id: 62, subMenus: [] },
             { name: 'News', id: 1, subMenus: [] /* Wrong */ },
             { name: 'Internships', id: 9, subMenus: [] },
-            {
-                name: 'More', subMenus: [
+            { name: 'More', subMenus: [
                     { name: 'About Us - Legal Bites', id: 1, subMenus: [] /* Wrong */ },
                     { name: 'Campus Amicus', id: 1, subMenus: [] /* Wrong */ },
                     { name: 'Career Advice', id: 1, subMenus: [] /* Wrong */ },
@@ -64,7 +63,11 @@ export class MenuConfig {
                     { name: 'Landmark Judgements', id: 47, subMenus: [] },
                     { name: 'Law Commission Reports', id: 46, subMenus: [] },
                     { name: 'Law School Review', id: 63, subMenus: [] },
-                    { name: 'Moot Court Memorials', id: 14, subMenus: [] }
+                    { name: 'Moot Court Memorials', id: 14, subMenus: [
+                        {
+                            name: 'Test', id: 1, subMenus:[]
+                        }
+                    ] }
                 ]
             },
         ]

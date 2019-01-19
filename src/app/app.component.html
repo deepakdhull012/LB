@@ -19,9 +19,9 @@
           <div *ngFor="let cat of categories">
             <ion-menu-toggle *ngIf="cat.subMenus.length == 0">
               <ion-item>
-                  <span [routerDirection]="'root'" [routerLink]="[cat.name]">{{cat.name}}</span>
+                <span [routerDirection]="'root'" [routerLink]="[cat.name]">{{cat.name}}</span>
               </ion-item>
-              
+
             </ion-menu-toggle>
             <ion-item *ngIf="cat.subMenus.length > 0">
               <span>{{cat.name}}</span>
@@ -37,20 +37,32 @@
                     </ion-label>
                   </ion-item>
                 </ion-menu-toggle>
-                <ion-item *ngIf="subcat.subMenus.length > 0">
-                  <ion-label>
-                    <span>{{subcat.name}}</span>
+                <div style='width:100%;' *ngIf="subcat.subMenus.length > 0">
+                  <ion-item>
+                    <ion-label>
+                      <span>{{subcat.name}}</span>
+                    </ion-label>
                     <ion-icon slot="end" name="add-circle" *ngIf="subcat.subMenus.length > 0 && !subcat.expanded"
                       (click)="subcat.expanded = true"></ion-icon>
                     <ion-icon slot="end" name="arrow-dropup-circle" *ngIf="subcat.subMenus.length > 0 && subcat.expanded"
                       (click)="subcat.expanded = false"></ion-icon>
-                  </ion-label>
+                  </ion-item>
 
-                </ion-item>
+                  <div *ngIf="subcat.expanded == true">
+                    <div style='margin-left: 15px;' *ngFor="let l3cat of subcat.subMenus">
+                      <ion-menu-toggle>
+                        <ion-item>
+                          <span [routerDirection]="'root'" [routerLink]="[l3cat.name]">{{l3cat.name}}</span>
+                        </ion-item>
+                      </ion-menu-toggle>
+                    </div>
+
+                  </div>
+                </div>
               </ion-item>
             </ion-list>
           </div>
-        <!-- <ion-menu-toggle auto-hide="false" *ngFor="let cat of categories">
+          <!-- <ion-menu-toggle auto-hide="false" *ngFor="let cat of categories">
               <ion-item>
                 <ion-label>
                   <span [routerDirection]="'root'" [routerLink]="[cat.name]">{{cat.name}}</span>
@@ -59,22 +71,22 @@
                 <ion-icon slot="end" name="arrow-dropup-circle" *ngIf="cat.subMenus.length > 0 && cat.expanded" (click)="cat.expanded = false"></ion-icon>
               </ion-item>
             </ion-menu-toggle> -->
-        <ion-menu-toggle auto-hide="false">
-          <ion-item [routerDirection]="'root'" [routerLink]="['landing','offlinePosts']">
-            <ion-icon slot="start" name="ios-log-out"></ion-icon>
-            <ion-label>
-              OffLine Posts
-            </ion-label>
-          </ion-item>
-        </ion-menu-toggle>
-        <ion-menu-toggle auto-hide="false" (click)="logout()">
-          <ion-item [routerDirection]="'root'" [routerLink]="['verify']">
-            <ion-icon slot="start" name="ios-log-out"></ion-icon>
-            <ion-label>
-              Log Out
-            </ion-label>
-          </ion-item>
-        </ion-menu-toggle>
+          <ion-menu-toggle auto-hide="false">
+            <ion-item [routerDirection]="'root'" [routerLink]="['landing','offlinePosts']">
+              <ion-icon slot="start" name="ios-log-out"></ion-icon>
+              <ion-label>
+                OffLine Posts
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+          <ion-menu-toggle auto-hide="false" (click)="logout()">
+            <ion-item [routerDirection]="'root'" [routerLink]="['verify']">
+              <ion-icon slot="start" name="ios-log-out"></ion-icon>
+              <ion-label>
+                Log Out
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
         </ion-list>
       </ion-content>
     </ion-menu>
