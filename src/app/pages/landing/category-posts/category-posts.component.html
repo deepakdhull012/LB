@@ -1,0 +1,30 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content no-padding>
+      <p text-center *ngIf="posts.length == 0 && !loading">No Posts to Show</p>
+      <ion-card *ngFor="let post of posts">
+        <ion-img [src]="post['featured_image_urls']['goodlife-widget-photo']"></ion-img>
+        <ion-card-header>
+          <ion-card-title (click)="goToPostDetail(post)">
+            {{post.title.rendered}}
+          </ion-card-title>
+          <p>{{post.date | smartDate:15}} by <a class="userUrl" (click)="getUserProfile(post._embedded.author[0].id)">{{post._embedded.author[0].name}}</a></p>
+          <ion-icon name="download" (click)="saveOffline(post)"></ion-icon>
+        </ion-card-header>
+        <ion-card-content>
+          <p [innerHTML]="post.excerpt.rendered"></p>
+        </ion-card-content>
+      </ion-card>
+    
+      <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+          <ion-infinite-scroll-content
+            loadingSpinner="bubbles"
+            loadingText="Loading more news...">
+          </ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+    </ion-content>

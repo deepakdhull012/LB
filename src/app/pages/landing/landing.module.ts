@@ -13,6 +13,7 @@ import { ContainerComponent } from './container/container.component';
 import { landingRoutes } from './landing.routes';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { OfflinePostsComponent } from './offline-posts/offline-posts.component';
+import { CategoryPostsComponent } from './category-posts/category-posts.component';
 
 @NgModule({
   imports: [
@@ -26,7 +27,8 @@ import { OfflinePostsComponent } from './offline-posts/offline-posts.component';
     LandingPage, 
     PostDetailComponent,
     ContainerComponent,
-    OfflinePostsComponent
+    OfflinePostsComponent,
+    CategoryPostsComponent
   ],
   providers: [
     NativeStorage

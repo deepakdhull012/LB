@@ -19,7 +19,7 @@
           <div *ngFor="let cat of categories">
             <ion-menu-toggle *ngIf="cat.subMenus.length == 0">
               <ion-item>
-                <span [routerDirection]="'root'" [routerLink]="[cat.name]">{{cat.name}}</span>
+                <span [routerDirection]="'root'" (click)="redirectTo(['landing','categoryPosts',cat.id])">{{cat.name}}</span>
               </ion-item>
 
             </ion-menu-toggle>
@@ -33,7 +33,7 @@
                 <ion-menu-toggle *ngIf="subcat.subMenus.length == 0">
                   <ion-item>
                     <ion-label>
-                      <span [routerDirection]="'root'" [routerLink]="[subcat.name]">{{subcat.name}}</span>
+                      <span [routerDirection]="'root'" (click)="redirectTo(['landing','categoryPosts',subcat.id])">{{subcat.name}}</span>
                     </ion-label>
                   </ion-item>
                 </ion-menu-toggle>
@@ -52,7 +52,7 @@
                     <div style='margin-left: 15px;' *ngFor="let l3cat of subcat.subMenus">
                       <ion-menu-toggle>
                         <ion-item>
-                          <span [routerDirection]="'root'" [routerLink]="[l3cat.name]">{{l3cat.name}}</span>
+                          <span [routerDirection]="'root'" (click)="redirectTo(['landing','categoryPosts',l3cat.id])">{{l3cat.name}}</span>
                         </ion-item>
                       </ion-menu-toggle>
                     </div>

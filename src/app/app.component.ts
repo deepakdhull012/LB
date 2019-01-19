@@ -42,4 +42,8 @@ export class AppComponent {
     localStorage.setItem('loggedInUserId', null);
     this.router.navigate(['/verify']);
   }
+
+  redirectTo(arr) {
+    this.router.navigate(arr);
+  }
 }
