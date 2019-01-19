@@ -63,11 +63,7 @@ export class MenuConfig {
                     { name: 'Landmark Judgements', id: 47, subMenus: [] },
                     { name: 'Law Commission Reports', id: 46, subMenus: [] },
                     { name: 'Law School Review', id: 63, subMenus: [] },
-                    { name: 'Moot Court Memorials', id: 14, subMenus: [
-                        {
-                            name: 'Test', id: 1, subMenus:[]
-                        }
-                    ] }
+                    { name: 'Moot Court Memorials', id: 14, subMenus: [] }
                 ]
             },
         ]
